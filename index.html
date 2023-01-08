@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch and manipulate</title>
+</head>
+
+<body>
+    <table>
+        
+    </table>
+    <p id="s"></p>
+    <p id="m"></p>
+
+    <script>
+        var d = "<tr><th>Name</th><th>Address</th><th>Salary</th><th>DateOfJoining</th></tr>";
+        var n = " ";
+        var s=" ";
+        fetch("https://rawcdn.githack.com/kmitprojectschool/sem12022/788c820e40a750fecb30433c8d346457b7859abc/employee.json")
+            .then((data) => {
+                //  console.log(data);
+                return data.json(); //converted to object
+            })
+            .then((objectData) => {
+                for (var i = 0; i < 3; i++) {
+                    const obj = objectData.Employees[i];
+                    d += "<tr><td>" + obj.Name + "</td>";
+                    d += "<td>" + obj.Address + "</td>";
+                    d += "<td>" + obj.Salary + "</td>";
+                    d += "<td>" + obj.DateOfJoining + "</td></tr>";
+                    document.querySelector("table").innerHTML = d;
+                    if (obj.Salary > 50000) {
+                        s+=obj.Name;
+                        s+=" ,";
+                        document.querySelector("#s").innerHTML = s;
+                    }
+                    if (obj.DateOfJoining[3] == '1' && obj.DateOfJoining[4] == '2') {
+                        n += obj.Name;
+                        document.querySelector('#m').innerHTML = n;
+                        n += ' , ';
+                        document.querySelector("#m").innerHTML = n;
+                    }
+                }
+            });
+            // document.querySelector("table").innerHTML = d;
+            
+            
+    </script>
+</body>
+
+</html>
